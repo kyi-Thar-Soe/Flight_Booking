@@ -1,0 +1,74 @@
+.info-container{
+    background-color: #eceff4;
+    margin-top: 70px;
+}
+.titleDiv{
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 60px;
+}
+.title h3{
+    font-size: 25px;
+    max-width: 75%;
+    letter-spacing: 2px;
+}
+.card-div{
+    display: flex;
+    margin: 30px 9rem 0px 15rem;
+    padding-bottom: 50px;
+}
+.single-card{
+    background-color: #ffffff;
+    margin-right: 80px;
+    height: 250px;
+    width: 200px;
+    border-radius: 10rem;
+}
+.info-div{
+    margin: 2.5rem 0px 0px 3rem;
+}
+.icon-div{
+    margin:0px 0px 20px 2rem;
+}
+.cal-icon,.check-icon,.save-icon{
+    background-color: #226ebd;
+    margin-right: 80px;
+    padding: 10px 35px 10px 10px;
+    border-radius: 4rem;
+    color: #f5f5f5;
+}
+.check-icon{
+    background-color: #b3674c;
+}
+.save-icon{
+    background-color: #df9c84;
+}
+.info-div p{
+    width: 150px;
+    margin: 20px 0px 0px -20px;
+    font-size: 12px;
+    text-align: center;
+    opacity: 0.6;
+}
+.save-more{
+    margin-left: 10px;
+}
+@media screen and (max-width: 768px){
+    .title h3{
+        font-size: 20px;
+        margin-left: 20px;
+    }
+    .view-btn Button{
+        font-size: 0.875rem;
+        padding:5px 10px;
+        margin-right: 20px;
+        width: 100px;
+    }
+    .card-div{
+        display: flex;
+        flex-direction: column;
+    }
+    .single-card{
+        margin: 0px 0px 20px -7.5rem;
+    }
+}

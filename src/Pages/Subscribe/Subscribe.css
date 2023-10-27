@@ -1,0 +1,102 @@
+.subscribe-container{
+    background-color: #eceff4;
+    margin-top: 6.25rem;
+}
+.subscribe-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   padding-top: 70px;
+}
+.subscribe-section h3{
+    font-size: 25px;
+    text-transform: capitalize;
+    margin-bottom: 30px;
+}
+.inputDiv{
+    display: flex;
+}
+.text-field{
+    border-radius: 4rem;
+    margin-right: 20px;
+}
+.text-field::placeholder{
+    font-size: 14px;
+    margin-left: 20px;
+    opacity: 0.8;
+}
+.subscribe-btn{
+    border-radius: 4rem !important;
+    padding: 0px 2.5rem !important;
+}
+.subscribe-btn span{
+    text-transform: capitalize;
+}
+.subInfo-container{
+    margin-top: 60px;
+}
+.social-icon{
+    display: flex;
+
+}
+.single-icon{
+    padding: 5px;
+    border: 1px solid rgb(176, 176, 176);
+    border-radius: 4rem;
+    margin-right: 10px;
+}
+.single-icon img{
+    width: 15px;
+    height: 15px;
+    margin: auto;
+}
+.subInfo-container{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    margin-left: 150px;
+}
+.single-subInfo{
+    margin-bottom: 20px;
+}
+.single-subInfo p{
+    font-size: 12px;
+    opacity: 0.6;
+    width: 75%;
+}
+.single-subInfo h3{
+    font-size: 16px;
+    opacity: 0.8;
+    margin-bottom: 20px;
+}
+.single-subInfo h5{
+    font-size: 14px;
+    opacity: 0.6;
+    text-transform: capitalize;
+}
+@media screen and (max-width: 768px){
+    .subscribe-section h3{
+        font-size: 20px;
+    }
+    .text-field{
+        width: 250px;
+    }
+    .text-field::placeholder{
+        font-size: 12px;
+    }
+    .subscribe-btn{
+        padding: 0px 1.5rem !important;
+    }
+    .subscribe-btn span{
+        font-size: 0.875rem;
+    }
+    .subInfo-container{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        margin: auto;
+        padding: 30px 0px 0px 40px;
+    }
+    .single-subInfo{
+        margin-bottom: 20px;
+    }
+}

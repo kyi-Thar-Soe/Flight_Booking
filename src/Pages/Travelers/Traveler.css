@@ -1,0 +1,102 @@
+.travelers-container{
+    margin-top: 30px;
+}
+.travelers-section h2{
+    text-align: center;
+    margin-top: 6.25rem;
+    margin-bottom: 60px;
+    font-size: 25px;
+}
+.travelers-div{
+    display: flex;
+    justify-content: space-evenly;
+    margin-right: 20px;
+}
+.single-traveler{
+    position: relative;
+    height: 280px;
+    width: 85%;
+    max-width: 200px;
+    overflow: hidden;
+    border-radius: 10rem;
+    gap: 1rem;
+    margin-left: 20px;
+}
+.traveler-details{
+    margin-left: 100px;
+}
+.destinationImage,.travelerImage,.travelerName{
+    position: absolute;
+}
+.destinationImage{
+    width: 100%;
+    height: 100%;
+    margin-left: 0px;
+}
+.travelerImage{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    bottom: 50px;
+    left: 40%;
+    transform: translateX(-50%);
+    border: 3px solid #f5f5f5;
+    border-radius: 50%;
+    transition: 0.4s ease-in-out;
+    animation: animated 2.3s infinite;
+}
+@keyframes animated {
+    0%{ transform:  translateY(0px);}
+    50%{ transform:  translateY(8px);}
+    100%{ transform:  translateY(0px);}
+}
+.travelerName{
+    width: 100%;
+    height: max-content;
+    bottom: -100%;
+    background-color: #f5f5f5;
+    padding: 1.5rem 1rem;
+    transition: 0.4s ease-out;
+    animation: animatedBorders 2.3s infinite;
+    margin-top: 160px;
+    margin-left: -100px;
+    
+    span{
+    display: block;
+    color: #191919;
+    font-weight: 700;
+    text-align: center;
+    }
+    p{
+    font-style: oblique;
+    text-align: center;
+    }
+    
+}
+@keyframes animatedBorders {
+    0%{ border-radius: 0rem;}
+    50%{ border-radius: 2rem;}
+    100%{ border-radius: 0rem;}
+}
+.hovered:hover{
+    .travelerName{
+        bottom: 0%;
+        transition: 1s ease-in-out;
+    }
+}
+@media screen and (max-width: 768px){
+    .travelers-container{
+        margin-top: -3rem;
+    }
+    .travelers-div{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        grid-template-rows: repeat(2,1fr);
+        margin-left: 20px;
+    }
+    .single-traveler{
+        max-width: 9.4rem;
+        height: 12.5rem;
+        margin-bottom: 20px;
+    }
+}

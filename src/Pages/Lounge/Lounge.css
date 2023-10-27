@@ -1,0 +1,62 @@
+.lounge-container{
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 0px 0px 0px;
+}
+.loungeTitle-div{
+    padding: 5.6rem 0px 0px 9.4rem;
+}
+.minor-title{
+    font-size: 25px !important;
+    margin-bottom: 30px;
+}
+.ecoImg-div{
+    display: flex;
+    margin-top: 50px;
+    margin-right: 9.4rem;
+    
+}
+.ecoImg-div img{
+    border-radius: 10rem;
+}
+.ecoOne img{
+    width: 9.4rem;
+    height: 16rem;
+    margin-right: -40px;
+}
+.ecoTwo img{
+    width: 8rem;
+    height: 12.5rem;
+    z-index: 1;
+    margin: 4.4rem 30px 0px 0px;
+}
+.single-grid{
+    margin-bottom: 10px;
+}
+.single-grid h5{
+    font-size: 16px;
+    opacity: 0.9;
+}
+.single-grid p{
+    width: 75%;
+    font-size: 12px;
+    opacity: 0.6;
+    line-height: 20px;
+}
+.grid-div{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-rows: repeat(2,1fr);
+    max-width: 37.5rem;
+}
+@media screen and (max-width: 768px){
+    .loungeTitle-div{
+        margin: -3rem 0px 0px -6rem;
+    }
+    .ecoImg-div{
+        display: none;
+    }
+    .service{
+        margin-top: -3px;
+    }
+}

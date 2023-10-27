@@ -1,0 +1,11 @@
+.navbarOne{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.account-button{
+    display: flex;
+    align-items: center;
+
+}
