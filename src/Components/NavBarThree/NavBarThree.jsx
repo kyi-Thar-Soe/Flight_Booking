@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './NavBarTwo.css';
+import './NavBarThree.css';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,7 +11,12 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import logo from '../../assets/logo.png';
 import { MenuItem } from '@mui/material';
-
+import { signOut } from 'firebase/auth';
+import { database } from '../../Firebase/Firebase';
+import { useNavigate } from 'react-router';
+import { Context } from '../../Context/Context';
+import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
+import { DropdownMenu,DropdownItem } from 'reactstrap';
 const pages = [
   { 
     id: 1,
@@ -40,8 +45,13 @@ const pages = [
   },
 ];
 
-function NavBarTwo() {
+function NavBarThree() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [persistName,setPersistName] = React.useState(()=> {
+    return localStorage.getItem('persistName')  || 'null';
+  });
+  const { username } = React.useContext(Context);
+  const navigate = useNavigate();
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -50,14 +60,28 @@ function NavBarTwo() {
     setAnchorElNav(null);
   };
 
+  const handleClick = () => {
+    localStorage.removeItem('username');
+    signOut(database)
+    .then(val => {
+        navigate('/');
+        console.log(val)
+    })
+  };
+  React.useEffect(() => {
+    if(username) {
+      setPersistName(username);
+      localStorage.setItem('persistName', username);
+    }
+  }, [username]);
   return (
     <AppBar position="sticky" sx={{background: "#eceff4",top: '0'}} elevation={0}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-        <img src={logo} alt='brand-img' sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, }}/>
+        <img src={logo} alt='brand-img' sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, }}
+        className='landingNav-img'/>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
-              className='menu-icon'
               size="large"
               aria-label="account of current user"
               aria-controls="menu-appbar"
@@ -65,7 +89,7 @@ function NavBarTwo() {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              <MenuIcon sx={{marginLeft: '18.5rem',color: '#191919'}} />
+              <MenuIcon sx={{color: '#191919'}}/>
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -86,13 +110,13 @@ function NavBarTwo() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page.id} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page.name}</Typography>
+                <MenuItem key={page.id} onClick={handleCloseNavMenu}  className='page-path'>
+                  <Typography textAlign="center" fontSize="15px">{page.name}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'flex' } }} className='box'>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }} className='box'>
             {pages.map((page,index) => (
               <Button
                 key={index}
@@ -110,15 +134,15 @@ function NavBarTwo() {
               </Button>
             ))}
           </Box>
-          <div>
-            <Button variant="contained" size='small' 
-            sx={{
-            height: "50%",
-            p: {xs : '0px' , md: '5px 20px'},
-            borderRadius: '30px',
-            fontSize: {xs : '12px', md : '14px'},
-            display: {xs : 'none',md : 'flex'},
-            textTransform: "capitalize"}}>Contact</Button>
+          <div className='account-div'>
+            <AccountCircleRoundedIcon sx={{color: 'gray',fontSize: '30px'}}/>
+            <h1>{persistName}</h1>
+            <div>
+              <div className='dropdown-toggle' data-bs-toggle="dropdown"></div>
+              <DropdownMenu className="dropdown-menu">
+                <DropdownItem className="dropdown-item" onClick={handleClick}>Log out</DropdownItem>
+              </DropdownMenu>
+              </div>
           </div>
       
         </Toolbar>
@@ -126,4 +150,4 @@ function NavBarTwo() {
     </AppBar>
   );
 }
-export default NavBarTwo;
+export default NavBarThree;

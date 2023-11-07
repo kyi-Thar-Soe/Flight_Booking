@@ -1,0 +1,10 @@
+@media screen and (min-width: 768px) and (max-width: 1023px){
+    .loginAndRegister{
+        margin: -10rem 0px 0px 0px;
+    }
+}
+@media screen and (max-width: 768px){
+    .loginAndRegister{
+        max-width: 300px;
+    }
+}

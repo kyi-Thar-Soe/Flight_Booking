@@ -8,3 +8,22 @@ img{
     display: flex;
     justify-content: center;
 }
+@media screen and (min-width: 768px) and (max-width: 1023px){
+    .app-bar{
+        position: sticky;
+        top: 0;
+        background-color: red;
+    }
+    img{
+        margin-left: 5px;
+    }
+    .menu-icon{
+        display: none !important;
+    }
+    
+}
+@media screen and (max-width: 768px){
+    img{
+        margin-left: 5px;
+    }
+}

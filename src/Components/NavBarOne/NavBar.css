@@ -9,3 +9,25 @@
     align-items: center;
 
 }
+.labels{
+    font-size: 16px;
+    opacity: 0.9;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+.textfield-control{
+    border-radius: 10px;
+}
+.textfield-control::placeholder{
+    font-size: 14px;
+    opacity: 0.5;
+}
+.formGroup{
+    margin-bottom: 30px;
+}
+.text-danger{
+    font-size: 12px;
+}
+.btn-primary{
+    border-radius: 10px;
+}

@@ -49,6 +49,14 @@
     grid-template-rows: repeat(2,1fr);
     max-width: 37.5rem;
 }
+@media screen and (min-width: 768px) and (max-width: 1023px){
+    .loungeTitle-div{
+        margin-left: -90px;
+    }
+    .ecoImg-div{
+        margin-right: auto;
+    }
+}
 @media screen and (max-width: 768px){
     .loungeTitle-div{
         margin: -3rem 0px 0px -6rem;

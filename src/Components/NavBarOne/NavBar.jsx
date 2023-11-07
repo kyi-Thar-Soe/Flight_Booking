@@ -14,43 +14,73 @@ import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
 import VibrationIcon from '@mui/icons-material/Vibration';
 import LanguageIcon from '@mui/icons-material/Language';
 import Modal from '@mui/material/Modal';
-import Fade from '@mui/material/Fade';
-import Backdrop from '@mui/material/Backdrop';
-import TextField from '@mui/material/TextField';
-import { FormLabel } from '@mui/material';
 
+import { useForm } from "react-hook-form";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { database } from "../../Firebase/Firebase";
+import { useNavigate } from "react-router-dom";
+import ModalPage from '../Modal/Modal';
+import ModalAlert from '../Modal/ModalAlert';
+import { Context } from '../../Context/Context';
 const pages = [
+
     {icon: <VibrationIcon/>,label: 'Support'},
     {icon: <LanguageIcon/>,label: 'Languages'},
     ];
-
-    const style = {
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-      width: 400,
-      bgcolor: 'background.paper',
-      border: '1px solid #eceff4',
-      borderRadius: '5px',
-      boxShadow: 24,
-      p: 4,
-    };
     
 function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [open, setOpen] = React.useState(false);
+  const [alert, setAlert] = React.useState(false);
+  const [login,setLogin] = React.useState(false);
+  const { updateUser } = React.useContext(Context);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const navigate = useNavigate();
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const handleAlertOpen = () => setAlert(true);
+  const handleAlertClose = () => setAlert(false);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
+  const onSubmit = (data,type) => {
+    const email = data.email;
+    const password = data.password;
+    const name = data.text;
+    console.log(email,password,name);
+    if(type === "Sign Up"){
+    createUserWithEmailAndPassword(database,email,password,name)
+    .then(data=> {
+      console.log(data);
+      navigate('/landingpage');
+      updateUser(name);
+    }).catch(err => {
+      console.log(err);
+      handleAlertOpen();
+      setLogin(true);
+    })
+    }else{
+    signInWithEmailAndPassword(database,email,password)
+    .then(data=> {
+      console.log(data);
+      navigate('/landingpage');
+      updateUser(name);
+    }).catch(err => {
+     console.log(err)
+    })
+    }
+    
+  };
+  
   return (
     <AppBar position="static" sx={{background: "#d8dee9",color: "#191919"}} elevation={0}>
       <Container maxWidth="xl">
@@ -86,7 +116,7 @@ function NavBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem   key={page.label} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
                     <span className='me-2'>{page.icon}</span>
                     <span>{page.label}</span>
@@ -99,7 +129,7 @@ function NavBar() {
           <Box sx={{ flexGrow: 1,display: { xs: 'none', md: 'flex',justifyContent: "center",marginLeft: '100px'}}}>
             {pages.map((page) => (
               <Button
-                key={page}
+                key={page.label}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, 
                     color: '#191919', 
@@ -115,14 +145,15 @@ function NavBar() {
             ))}
           </Box>
           <div className='account-button gap-3'>
-            <Button variant="outlined" size='small' 
+          <Button variant="outlined" size='small' 
             sx={{
             height: "50%",
-            borderRadius: '30px', 
-            p: {xs : '0px' , md: '5px 20px'},
-            fontSize: {xs : '12px', md : '14px'},
-            textTransform: "capitalize",
-            }}>Log in</Button>
+            borderRadius: '30px',
+            p: {xs : '1px' , md: '5px 20px'},
+            fontSize: {xs : '12px', md: '14px'},
+            textTransform: "capitalize"}}
+            onClick={()=>handleOpen(setLogin(true))}
+            >Log in</Button>
             <Button variant="contained" size='small' 
             sx={{
             height: "50%",
@@ -130,72 +161,14 @@ function NavBar() {
             p: {xs : '1px' , md: '5px 20px'},
             fontSize: {xs : '12px', md: '14px'},
             textTransform: "capitalize"}}
-            onClick={handleOpen}
+            onClick={()=>handleOpen(setLogin(false))}
             >Sign up</Button>
           </div>
           {/*Modal*/}
-          <div>
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        slots={{ backdrop: Backdrop }}
-        slotProps={{
-          backdrop: {
-            timeout: 500,
-          },
-        }}
-      >
-        <Fade in={open}>
-          <Box sx={style}>
-            <Typography id="transition-modal-title" variant="h5" component="h2" color="#226ebd" fontWeight="700">
-              Sign Up
-            </Typography>
-            <FormLabel sx={{fontSize: '18px',mt: '40px',mb: '5px'}}>
-              Name
-              <span style={{ color: 'red',fontSize: '12px',marginLeft: '14.5rem',marginRight: '3px'}}>*</span>
-              <span style={{ color: 'red',fontSize: '12px'}}>required</span>
-            </FormLabel>
-            <TextField
-            id="demo-helper-text-misaligned"
-            label="Enter your name"
-            size='small'
-            sx={{
-              width: '100%',
-              mb: '20px',
-            }}
-            />
-
-            <FormLabel sx={{fontSize: '18px',mb: '5px'}}>
-              Email
-              <span style={{ color: 'red',fontSize: '12px',marginLeft: '14.5rem',marginRight: '3px'}}>*</span>
-              <span style={{ color: 'red',fontSize: '12px'}}>required</span>
-            </FormLabel>
-            <TextField
-            id="demo-helper-text-misaligned"
-            label="Enter your email"
-            size='small'
-            sx={{width: '100%',mb: '20px'}}
-            />
-
-            <FormLabel sx={{ fontSize: '18px',mb: '5px'}}>
-            Password
-              <span style={{ color: 'red',fontSize: '12px',marginLeft: '12.5rem',marginRight: '3px'}}>*</span>
-              <span style={{ color: 'red',fontSize: '12px'}}>required</span>
-            </FormLabel>
-            <TextField
-            id="demo-helper-text-misaligned"
-            label="Enter your password"
-            size='small'
-            sx={{width: '100%',mb: '30px'}}
-            />
-            <Button variant='contained' sx={{marginLeft: '35%'}}>Sign Up</Button>
-          </Box>
-        </Fade>
-      </Modal>
-          </div>
+          <ModalPage open={open} login={login} register={register} handleSubmit={handleSubmit}
+          errors={errors} handleClose={handleClose} onSubmit={onSubmit}/>
+          {/*Show alert when account is already use*/}
+          <ModalAlert alert={alert} handleAlertClose={handleAlertClose}/>
         </Toolbar>
       </Container>
     </AppBar>

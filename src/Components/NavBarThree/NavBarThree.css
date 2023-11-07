@@ -1,0 +1,33 @@
+.dropdown-toggle{
+    color: gray;
+}
+.account-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.account-div h1{
+    font-size: 14px;
+    color: #226ebd;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+.dropdown-menu{
+    margin-top: 20px !important;
+    min-width: 100px;
+}
+.dropdown-item{
+    text-align: center;
+}
+@media screen and (min-width: 768px) and (max-width: 1023px){
+    .landingNav-img{
+        display: none;
+    }
+}
+@media screen and (max-width: 768px){
+    .landingNav-img{
+        display: none;
+    }
+   
+}
